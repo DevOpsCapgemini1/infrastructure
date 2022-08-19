@@ -2,7 +2,7 @@
 RG="IaC-tasks7-vm"
 vmName="myVM"
 image="UbuntuLTS"
-price="50"
+#price="50"
 vnetName="myVNET"
 subnetName="mySubnet1"
 reservedIP="20.111.33.210"
