@@ -1,0 +1,2 @@
+ResourceGroupName,NsgName,Location,
+New-AZ-PG-SR,SomeNsgName1,francecentral

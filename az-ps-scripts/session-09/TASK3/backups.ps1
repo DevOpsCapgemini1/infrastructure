@@ -1,4 +1,4 @@
-Connect-AzAccount
+
 # Generates a Random Value
 $Random=(New-Guid).ToString().Substring(0,8)
 
@@ -35,6 +35,5 @@ $sasUrl = New-AzStorageContainerSASToken -Name $container -Permission rwdl `
 -Context $storage.Context -ExpiryTime (Get-Date).AddYears(1) -FullUri
 
 # Schedule a backup every day, beginning in one hour, and retain for 10 days
-Edit-AzWebAppBackupConfiguration -ResourceGroupName $ResourceGroup -Name $AppName `
--StorageAccountUrl $sasUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup `
+Edit-AzWebAppBackupConfiguration -ResourceGroupName myResourceGroup -Name $AppName -StorageAccountUrl $sasUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup 
 -StartTime (Get-Date).AddHours(1) -RetentionPeriodInDays 10

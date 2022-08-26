@@ -1,0 +1,2 @@
+ResourceGroupName,Location,VnetName,AddressPrefix
+New-AZ-PG-SR,francecentral,myVVNET,"10.0.0.0/16"

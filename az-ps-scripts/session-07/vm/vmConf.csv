@@ -1,0 +1,2 @@
+RG,vmName,location,image,size,vnetName,subnetName,dnsName,reservedIp
+NEW-AZ-PG-SR,AZ-PS-VM,francecentral,UbuntuLTS,Standard_D2s_v3,myVVNET,mySubnet-ps,

@@ -1,0 +1,2 @@
+RG,aspName,loc,price_tier,appName,NumberofWorkers,dockerImage
+storage-resource-group,myASPxz,westeurope,Basic,myAppxz,2,mcr.microsoft.com/dotnet/samples:aspnetapp

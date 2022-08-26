@@ -1,7 +1,9 @@
-$RG = 'AZ-PS-RG'
-$NSG_NAME = 'test-nsg-01'
+$nsgConf = import-csv ".\nsg-conf.csv"
+$RG = $nsgConf.ResourceGroupName
+$NSG_NAME = $nsgConf.NsgName
+$location = $nsgConf.Location
 # Region is only provided when we create the NSG (the command below), later on I just update it instead of creatning new NSG
-# $NSG = New-AzNetworkSecurityGroup -Name $NSG_NAME -ResourceGroupName $RG  -Location  "francecentral"
+$NSG = New-AzNetworkSecurityGroup -Name $NSG_NAME -ResourceGroupName $RG  -Location $location
 $NSG = Get-AzNetworkSecurityGroup -Name $NSG_NAME `
                  -ResourceGroupName $RG
 

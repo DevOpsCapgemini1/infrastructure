@@ -1,14 +1,15 @@
+$vmConf = import-csv ".\vmConf.csv"
 Connect-AzAccount
 $cred = Get-Credential -Message "Enter a username and password for the virtual machine."
-$RG = 'AZ-PS-RG'
-$VM_NAME = 'AZ-PS-VM'
-$location = 'francecentral'
-$image = 'UbuntuLTS'
-$size = 'Standard_D2s_v3'
-$vnetName='myVNet'
-$SubnetName = 'mySubnet-ps'
-$dnsName='az-ps-rg-dns'
-$reservedIP= '20.117.159.105'
+$RG = $vmConf.RG
+$VM_NAME = $vmConf.vmName
+$location = $vmConf.location
+$image = $vmConf.image
+$size = $vmConf.size
+$vnetName= $vmConf.vnetName
+$SubnetName = $vmConf.subnetName
+$dnsName=$vmConf.dnsName
+$reservedIP= $vmConf.reservedIP
 
 
 $vmParams = @{
@@ -24,10 +25,12 @@ $vmParams = @{
 
 if(-not [string]::IsNullOrWhiteSpace($dnsName)){
     $vmParams['DomainNameLabel'] = $dnsName
+ 
 }
 
 if(-not [string]::IsNullOrWhiteSpace($reservedIP)){
     $vmParams['PublicIpAddressName'] = $reservedIP
+
 }
 
 $newVM1 = New-AzVM @vmParams
