@@ -59,9 +59,3 @@ az webapp config backup update --resource-group $resourceGroup --webapp-name $we
 
 
 
-# Restore the app by overwriting it with the backup data
-
-az webapp config backup restore --resource-group $resourceGroup --webapp-name $webapp \
---backup-name $backup --container-url $sasurl --overwrite
-
-# fails - https://github.com/Azure/azure-cli/issues/19492
