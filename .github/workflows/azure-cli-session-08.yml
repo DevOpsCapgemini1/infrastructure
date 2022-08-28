@@ -1,0 +1,25 @@
+name: Azure CLI 08
+on: workflow_dispatch
+
+
+permissions:
+      id-token: write
+      contents: read
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: acitons checkout
+        uses: actions/checkout@v1
+      - name: Azure CLI app service
+        uses: Azure/cli@v1
+        with:
+          inlineScript: |
+                         chmod +x $GITHUB_WORKSPACE/AZ-CLI-scripts/session-08/app-service.sh
+                         $GITHUB_WORKSPACE/AZ-CLI-scripts/session-08/app-service.sh IaC-tasks7    
