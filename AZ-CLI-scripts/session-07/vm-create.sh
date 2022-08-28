@@ -1,5 +1,5 @@
 #!/bin/bash
-RG="IaC-tasks7-vm"
+RG=$1
 vmName="myVM"
 image="UbuntuLTS"
 size="Standard_D2s_v3"

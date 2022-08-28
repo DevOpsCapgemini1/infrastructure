@@ -1,5 +1,5 @@
 #!/bin/bash
-rg='testing'
+rg=$1
 resources="$(az resource list --resource-group $rg | grep id | awk -F \" '{print $4}')"
 
 for id in $resources; do

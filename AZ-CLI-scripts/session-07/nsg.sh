@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Creating NSG with  rule"
-RG="IaC-tasks7"
+RG=$1
 nsgName="myNSG"
 loc="uksouth"
 nsgRule='myNsgRule'

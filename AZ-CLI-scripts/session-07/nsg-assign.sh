@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Assigning NSG to VNet subnet"
-RG="IaC-tasks7"
+RG=$1
 nsgName="myNSG"
 vnetName="myVNET"
 subnetName=(mySubnet1 mySubnet2 mySubnet3)

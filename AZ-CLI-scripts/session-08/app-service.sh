@@ -1,5 +1,5 @@
 #!/bin/bash
-resourceGroup='storage-resource-group'
+resourceGroup=$1
 appServicePlan='linux-app-service-plan'
 loc='westeurope'
 now=1

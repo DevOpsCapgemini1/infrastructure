@@ -4,7 +4,7 @@
 # Variable block
 let "randomIdentifier=$RANDOM*$RANDOM"
 location="westeurope"
-resourceGroup="app-service-rg-$randomIdentifier"
+resourceGroup=$1
 tag="backups-app-acc.sh"
 appServicePlan="app-service-plan-$randomIdentifier"
 webapp="web-app-$randomIdentifier"
