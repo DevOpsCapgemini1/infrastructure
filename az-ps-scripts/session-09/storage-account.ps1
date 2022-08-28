@@ -1,11 +1,12 @@
+$conf = import-csv ".\parameters_storage_acc.csv"
 $ResourceGroup='myXResourceGroup'
-$Location="West Europe"
+$Location=$conf.location
 # Create a Resource Group
-New-AzResourceGroup -Name $ResourceGroup -Location $Location
+New-AzResourceGroup -Name $ResourceGroup -Location $Location -Force
 
 # Create Storage Account
 $Random=(New-Guid).ToString().Substring(0,8)
-$StorageName="webappstorage$Random"
-$PricingTier='Hot'
-
-New-AzStorageAccount -Name $StorageName -ResourceGroupName $ResourceGroup -Location $Location -AccessTier $PricingTier
+$StorageName=$conf.storageName
+$PricingTier=$conf.pricingTier
+$SkuName = $conf.SkuName
+New-AzStorageAccount -Name $StorageName -ResourceGroupName $ResourceGroup -Location $Location -AccessTier $PricingTier -SkuName $SkuName
