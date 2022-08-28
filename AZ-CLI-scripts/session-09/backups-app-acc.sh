@@ -6,10 +6,10 @@ let "randomIdentifier=$RANDOM*$RANDOM"
 location="westeurope"
 resourceGroup=$1
 tag="backups-app-acc.sh"
-appServicePlan="app-service-plan-$randomIdentifier"
-webapp="web-app-$randomIdentifier"
-storage="webappstorage$randomIdentifier"
-container="appbackup$randomIdentifier"
+appServicePlan="xyf-app-service-plan-$randomIdentifier"
+webapp="xyf-web-app-$randomIdentifier"
+storage="xyf-webappstorage$randomIdentifier"
+container="xyf-appbackup$randomIdentifier"
 backup="backup$randomIdentifier"
 expirydate=$(date -I -d "$(date) + 1 month")
 
