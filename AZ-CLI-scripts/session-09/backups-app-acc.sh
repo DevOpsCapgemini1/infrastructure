@@ -14,8 +14,8 @@ backup="backup$randomIdentifier"
 expirydate=$(date -I -d "$(date) + 1 month")
 
 # Create a resource group.
-echo "Creating $resourceGroup in "$location"..."
-az group create --name $resourceGroup --location "$location" --tag $tag
+# echo "Creating $resourceGroup in "$location"..."
+# az group create --name $resourceGroup --location "$location" --tag $tag
 
 # Create a Storage Account
 echo "Creating $storage"
