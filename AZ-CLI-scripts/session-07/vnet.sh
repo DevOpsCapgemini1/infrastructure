@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Creating VNET with x subnets"
-ResourceGroup="IaC-tasks7"
+ResourceGroup=$1
 vnetName="myVNET"
 location="uksouth"
 vnetAdress="10.1.0.0/16"
