@@ -40,5 +40,5 @@ jobs:
         with:
           inlineScript: |
                          chmod +x $GITHUB_WORKSPACE/AZ-CLI-scripts/session-07/vm-create.sh
-                         $GITHUB_WORKSPACE/AZ-CLI-scripts/session-07/vm-create.sh IaC-tasks7 
+                         $GITHUB_WORKSPACE/AZ-CLI-scripts/session-07/vm-create.sh IaC-tasks7-vm 
 
