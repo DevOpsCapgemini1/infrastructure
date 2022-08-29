@@ -1,0 +1,2 @@
+ResourceGroup,AppName,StorageName,Location,container,PlanName,pricingTier,SkuName
+MyResourceGroup921,webappwithStorage192,webappstorage951,westeurope,appbackup,WebAppwithStoragePlan,Standard,Standard_LRS

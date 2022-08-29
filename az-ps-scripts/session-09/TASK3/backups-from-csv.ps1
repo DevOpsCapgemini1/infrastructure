@@ -1,24 +1,26 @@
+Connect-AzAccount
 
-# Generates a Random Value
-$Random=(New-Guid).ToString().Substring(0,8)
-
+$conf = import-csv ".\parameters_backups.csv"
 # Variables
-$ResourceGroup="MyResourceGroup$Random"
-$AppName="webappwithStorage$Random"
-$StorageName="webappstorage$Random"
-$Location="westeurope"
-$container="appbackup"
+$ResourceGroup=$conf.ResourceGroup
+$AppName=$conf.AppName
+$StorageName=$conf.StorageName
+$Location=$conf.Location
+$container=$conf.container
+$PlanName=$conf.PlanName
+$pricingTier=$conf.pricingTier
+$SkuName = $conf.SkuName
 # Create a Resource Group
 New-AzResourceGroup -Name $ResourceGroup -Location $Location
 
 # Create an App Service Plan
-New-AzAppservicePlan -Name WebAppwithStoragePlan -ResourceGroupName $ResourceGroup -Location $Location -Tier Standard 
+New-AzAppservicePlan -Name $PlanName -ResourceGroupName $ResourceGroup -Location $Location -Tier $pricingTier 
 
 # Create a Web App in the App Service Plan
-New-AzWebApp -Name $AppName -ResourceGroupName $ResourceGroup -Location $Location -AppServicePlan WebAppwithStoragePlan
+New-AzWebApp -Name $AppName -ResourceGroupName $ResourceGroup -Location $Location -AppServicePlan $PlanName
 
 # Create Storage Account
-$storage = New-AzStorageAccount -Name $StorageName -ResourceGroupName $ResourceGroup -Location $Location -SkuName Standard_LRS
+$storage = New-AzStorageAccount -Name $StorageName -ResourceGroupName $ResourceGroup -Location $Location -SkuName $SkuName
 
 # Get Connection String for Storage Account
 $StorageKey=(Get-AzStorageAccountKey -ResourceGroupName $ResourceGroup -Name $StorageName).Value[0]
@@ -30,10 +32,10 @@ Set-AzWebApp -ConnectionStrings @{ MyStorageConnStr = @{ Type="Custom"; Value="D
 New-AzStorageContainer -Name $container -Context $storage.Context
 
 # Generates an SAS token for the storage container, valid for 1 year.
-# NOTE: You can use the same SAS token to make backups in Web Apps until -ExpiryTime
 $sasUrl = New-AzStorageContainerSASToken -Name $container -Permission rwdl `
 -Context $storage.Context -ExpiryTime (Get-Date).AddYears(1) -FullUri
 
 # Schedule a backup every day, beginning in one hour, and retain for 10 days
-Edit-AzWebAppBackupConfiguration -ResourceGroupName myResourceGroup -Name $AppName -StorageAccountUrl $sasUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup 
+Edit-AzWebAppBackupConfiguration -ResourceGroupName $ResourceGroup -Name $AppName `
+-StorageAccountUrl $sasUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup `
 -StartTime (Get-Date).AddHours(1) -RetentionPeriodInDays 10
