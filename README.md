@@ -1,5 +1,5 @@
 # REPO WITH AZURE PIPELINES
-It is a little bit outdated, as I changed some scripts only here in GitHub, but all  of pipelines works fine.
+It is a little bit outdated, as I changed some scripts only here in GitHub, but all  of pipelines works fine and were untouched.
 ```
 https://dev.azure.com/michalbidzinski12/az-and-devops/_git/infrastructure
 ```
