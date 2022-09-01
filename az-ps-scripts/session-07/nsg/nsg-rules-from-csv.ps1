@@ -11,8 +11,8 @@ foreach($rule in import-csv ".\nsg-rules.csv")
 {
   
     $NSG | Add-AzNetworkSecurityRuleConfig -Name $rule.name `
-           -Access Allow -Protocol Tcp -Direction $rule.direction -Priority $rule.priority `
-           -SourceAddressPrefix $rule.source -SourcePortRange * `
+           -Access $rule.Access -Protocol $rule.Protocol -Direction $rule.direction -Priority $rule.priority `
+           -SourceAddressPrefix $rule.source -SourcePortRange $rule.SourcePortRange `
            -DestinationAddressPrefix $rule.destination -DestinationPortRange $rule.port
 }
 

@@ -1,6 +1,7 @@
-Connect-AzAccount
+Connect-AzAccount -TenantId 5d26cd72-b7b5-410d-969c-0b980709fdf6
 
 $conf = import-csv ".\parameters_backups.csv"
+$schedule = import-csv ".\backup_schedule.csv"
 # Variables
 $ResourceGroup=$conf.ResourceGroup
 $AppName=$conf.AppName
@@ -10,6 +11,9 @@ $container=$conf.container
 $PlanName=$conf.PlanName
 $pricingTier=$conf.pricingTier
 $SkuName = $conf.SkuName
+$FrequencyInterval = $schedule.FrequencyInterval
+$RetentionPeriodInDays = $schedule.RetentionPeriodInDays
+$FrequencyUnit = $schedule.FrequencyUnit
 # Create a Resource Group
 New-AzResourceGroup -Name $ResourceGroup -Location $Location
 
@@ -37,5 +41,5 @@ $sasUrl = New-AzStorageContainerSASToken -Name $container -Permission rwdl `
 
 # Schedule a backup every day, beginning in one hour, and retain for 10 days
 Edit-AzWebAppBackupConfiguration -ResourceGroupName $ResourceGroup -Name $AppName `
--StorageAccountUrl $sasUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup `
--StartTime (Get-Date).AddHours(1) -RetentionPeriodInDays 10
+-StorageAccountUrl $sasUrl -FrequencyInterval $FrequencyInterval -FrequencyUnit $FrequencyUnit -KeepAtLeastOneBackup `
+-StartTime (Get-Date).AddHours(1) -RetentionPeriodInDays $RetentionPeriodInDays
